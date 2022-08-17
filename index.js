@@ -55,13 +55,9 @@ const sortear = () => {
 
     sortedNumbers.push({ column, choosedNumber });
 
-    let html = `<p>Número Sorteado: ${column} : ${choosedNumber}</p>`;
-    
-    const orderd = sortedNumbers.sort((a, b) => a.choosedNumber - b.choosedNumber);
+    let html = `<p>Número Sorteado:</p> <p>${column} - ${choosedNumber}</p>`;
 
-    orderd.map(n => {
-      html += `<p>${n.column}-${n.choosedNumber}</p>`;
-    })
+    carregarLista()
     
     divSortedNumber.innerHTML = html;
   } else { 
@@ -69,4 +65,18 @@ const sortear = () => {
   }
 }
 
+const carregarLista = () => {
+  let html = ""
+  columnsDefinitions.map(i => {
+    const coluna = i.column;
+    const numerosParaColuna = sortedNumbers.filter(item => item.column === coluna).sort((a, b) => a.choosedNumber - b.choosedNumber);
+    html += "<div class='items'>";
+    html += `<h2 id="${coluna}">${coluna}</h2>`
+    numerosParaColuna.map(a => {
+      html += `<p id="${a.choosedNumber}">${a.choosedNumber}</p>`
+    })
+    html += "</div>";
+  })
+  divAllSortedNumber.innerHTML = html
 
+}
