@@ -42,6 +42,22 @@ columnsDefinitions.map(c => {
   }
 });
 
+const showSortedNumber = () => {
+  const number = document.getElementById("number");
+  
+  number.classList.remove("hide");
+
+  hideNumberButton();
+
+  carregarLista();
+}
+
+const hideNumberButton = () => {
+  const numberButton = document.getElementById("numberButton");
+  
+  numberButton.classList.add("hide");
+}
+
 const sortear = () => {
   
   if (allNumbers.length > 0) {
@@ -55,9 +71,11 @@ const sortear = () => {
 
     sortedNumbers.push({ column, choosedNumber });
 
-    let html = `<p>Número Sorteado:</p> <p>${column} - ${choosedNumber}</p>`;
-
-    carregarLista()
+    let html = '<span>NÚMERO SORTEADO</span>';
+    
+    html +=`<button id='numberButton' onClick='showSortedNumber()'>MOSTRAR NÚMERO</button>`;
+    
+    html +=`<p id="number" class="hide">${column} - ${choosedNumber}</p>`;
     
     divSortedNumber.innerHTML = html;
   } else { 
@@ -71,9 +89,9 @@ const carregarLista = () => {
     const coluna = i.column;
     const numerosParaColuna = sortedNumbers.filter(item => item.column === coluna).sort((a, b) => a.choosedNumber - b.choosedNumber);
     html += "<div class='items'>";
-    html += `<h2 id="${coluna}">${coluna}</h2>`
+    html += `<h2 id="${coluna}" class="column">${coluna}</h2>`
     numerosParaColuna.map(a => {
-      html += `<p id="${a.choosedNumber}">${a.choosedNumber}</p>`
+      html += `<p>${a.choosedNumber}</p>`
     })
     html += "</div>";
   })
