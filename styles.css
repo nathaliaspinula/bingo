@@ -136,3 +136,7 @@ body, * {
     font-size: 20px;
     text-align: center;
 }
+
+#showSortedNumber {
+    text-align: center;
+}
